@@ -13,14 +13,94 @@
         <script src="../assets/js/uswds.min.js"></script>
 
         <div style="padding: 10px">
-            <h1 class="font-serif-xl" style="color: rgb(182, 50, 31)">Elected Officials</h1>
+            <span class="font-serif-xl" style="color: rgb(182, 50, 31)">Elected Officials</span>
 
-            <p>Cupcake ipsum dolor sit amet. Bear claw topping souffle oat Cupcake
+            <p class="font-serif-sm">
+                Cupcake ipsum dolor sit amet. Bear claw topping souffle oat Cupcake
                 sweet roll cookie lemon drops candy canes. Cookie sugar plum I love muffin
                 brownie.
             </p>
-        </div>
 
+            <div style="padding-top: 20px">
+                <span class="font-serif-lg" style="color: rgb(27, 56, 88)">
+                    Enter your address and we'll find your elected officials
+                </span>
+
+                <form class="usa-form" style="padding-top: 20px">
+                    <fieldset class="usa-fieldset">
+                        <legend class="usa-legend" style="font-weight: bolder;">I want to...</legend>
+                        <div class="usa-checkbox">
+                            <input
+                              class="usa-checkbox__input"
+                              id="learn"
+                              type="checkbox"
+                              name="i-want-to"
+                              value="learn"
+                            />
+                            <label class="usa-checkbox__label" for="learn">
+                                Learn about my elected officials
+                            </label>
+                        </div>
+
+                        <div class="usa-checkbox">
+                            <input
+                              class="usa-checkbox__input"
+                              id="contact"
+                              type="checkbox"
+                              name="i-want-to"
+                              value="contact"
+                            />
+                            <label class="usa-checkbox__label" for="contact">
+                                Contact my elected officials
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <label class="usa-label" for="input-address">street address*</label>
+                    <input
+                      class="usa-input"
+                      id="input-address"
+                      name="input-address"
+                      type="text"
+                    />
+
+                    <label class="usa-label" for="input-city">city*</label>
+                    <input
+                      class="usa-input"
+                      id="input-city"
+                      name="input-city"
+                      type="text"
+                    />
+
+                    <div style="display: flex;">
+                        <div style="padding-right: 20px;">
+                            <label class="usa-label" for="input-city">state*</label>
+                            <input
+                              class="usa-input"
+                              id="input-state"
+                              name="input-state"
+                              type="text"
+                            />
+                        </div>
+
+                        <div style="width: 40%">
+                            <label class="usa-label" for="input-zip">ZIP*</label>
+                            <input
+                              class="usa-input"
+                              id="input-zip"
+                              name="input-zip"
+                              type="text"
+                            />
+                        </div>
+                    </div>
+
+                    <p class="font-serif-3xs">Say something brief about privacy here. <a>link to more privacy details.</a></p>
+                
+                    <button class="usa-button usa-button--secondary">Find my reps!</button>
+                </form>
+            </div>
+
+        </div>
 
     </body>
 </html>
