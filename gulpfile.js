@@ -38,19 +38,19 @@ PATHS
 */
 
 // Project Sass source directory
-const PROJECT_SASS_SRC = "./styles/scss";
+const PROJECT_SASS_SRC = "./assets/scss";
 
 // Images destination
-const IMG_DEST = "./assets/images";
+const IMG_DEST = "./assets/img";
 
 // Fonts destination
-const FONTS_DEST = "./styles/fonts";
+const FONTS_DEST = "./assets/fonts";
 
 // Javascript destination
-const JS_DEST = "./js";
+const JS_DEST = "./assets/javascript";
 
 // Compiled CSS destination
-const CSS_DEST = "./styles/css";
+const CSS_DEST = "./assets/css";
 
 // Site CSS destination
 // Like the _site/assets/css directory in Jekyll, if necessary.
