@@ -5,14 +5,88 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>Elected Officials | USA.gov</title>
-        <script src="assets/javascript/uswds-init.min.js"></script>
-        <link rel="stylesheet" href="assets/css/styles.css" />
+        <script src="../assets/javascript/uswds-init.min.js"></script>
+        <link rel="stylesheet" href="../assets/css/styles.css" />
     </head>
 
     <body>
-        <script src="assets/javascript/uswds.min.js"></script>
+        <script src="../assets/javascript/uswds.min.js"></script>
 
-        <h1 class="font-serif-2xl">Under Construction</h1>
+        <div style="padding: 10px">
+            <h1 class="font-serif-xl" style="color: rgb(182, 50, 31)">Learn About Your Elected Officials</h1>
+
+            <p class="font-serif-sm">
+                Cupcake ipsum dolor sit amet. Bear claw topping souffle oat Cupcake
+                sweet roll cookie lemon drops candy canes. Cookie sugar plum I love muffin
+                brownie.
+            </p>
+
+            <br>
+            
+            <h3 class="font-serif-sm" style="padding-bottom: 0px; margin-bottom: 0px;">
+                Address you entered:
+            </h3>
+
+            <p class="font serif-sm" style="margin-top: 0px;">
+                Your Address<br>
+                City, State, Zip
+            </p>
+
+            <p class="font-serif-3xs text-underline"><a href="../index.html">edit address</a></p>
+
+            <br>
+
+            <h1 class="font-serif-lg" style="color: rgb(27, 56, 88); padding-bottom: 10px;">Your Elected Officials Are:</h1>
+
+            <!-- The following div is a template of how all the reprsentatives will be rendered to the page. -->
+            <div>
+                <h2 class="font-serif-md" style="color: rgb(26, 54, 85)">President</h2>
+                <img src=""/>
+                <p class="font-serif-md">Joe Biden, President of the United States</p>
+
+                <div class="usa-accordion" aria-multiselectable="true">
+                    <!-- Use the accurate heading level to maintain the document outline -->
+                    <h4 class="usa-accordion__heading">
+                      <button
+                        class="usa-accordion__button"
+                        aria-expanded="true"
+                        aria-controls="m-a1"
+                      >
+                        Biography of Joe Biden
+                      </button>
+                    </h4>
+                    <div id="m-a1" class="usa-accordion__content usa-prose">
+                      <p>
+                        Congress shall make no law respecting an establishment of religion, or
+                        prohibiting the free exercise thereof; or abridging the freedom of speech,
+                        or of the press; or the right of the people peaceably to assemble, and to
+                        petition the Government for a redress of grievances.
+                      </p>
+                    </div>
+                  
+                    <!-- Use the accurate heading level to maintain the document outline -->
+                    <h4 class="usa-accordion__heading">
+                      <button
+                        class="usa-accordion__button"
+                        aria-expanded="false"
+                        aria-controls="m-a2"
+                      >
+                        Contact Joe Biden
+                      </button>
+                    </h4>
+                    <div id="m-a2" class="usa-accordion__content usa-prose">
+                      <p>
+                        A well regulated Militia, being necessary to the security of a free State,
+                        the right of the people to keep and bear Arms, shall not be infringed.
+                      </p>
+                      <ul>
+                        <li>This is a list item</li>
+                        <li>Another list item</li>
+                      </ul>
+                    </div>
+                  </div>
+            </div>
+        </div>
     </body>
 
 </html>
