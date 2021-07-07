@@ -9,7 +9,10 @@
         <link rel="stylesheet" href="../assets/css/styles.css" />
     </head>
 
-    <body>
+    <body onload="load()">
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script src="../assets/javascript/civic-api.js"></script>
+
         <script src="../assets/javascript/uswds.min.js"></script>
 
         <div style="padding: 10px">
@@ -27,7 +30,7 @@
                 Address you entered:
             </h3>
 
-            <p class="font serif-sm" style="margin-top: 0px;">
+            <p class="font serif-sm" style="margin-top: 0px;" id="display-address">
                 Your Address<br>
                 City, State, Zip
             </p>

@@ -52,4 +52,14 @@ function start() {
     lookup('1263 Pacific Ave. Kansas City KS', renderResults);
 }
 
-gapi.load('client', start);
+function load() {
+    var inputAddress = window.location.href.split("input-address=")[1].split("&")[0].split("+").join(" ");
+    var inputCity = window.location.href.split("input-city=")[1].split("&")[0].split("+").join(" ");
+    var inputState = window.location.href.split("input-state=")[1].split("&")[0];
+    var inputZip = window.location.href.split("input-zip=")[1].split("&")[0];
+
+    var displayAddress = document.getElementById("display-address");
+    displayAddress.innerHTML = inputAddress + "<br>" + inputCity + ", " + inputState + " " + inputZip;
+}
+
+// gapi.load('client', start);
