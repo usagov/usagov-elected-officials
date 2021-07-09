@@ -27,14 +27,24 @@ function renderResults(response, rawResponse) {
             "Error while trying to fetch elected officials"));
         return;
     }
-    var normalizedAddress = response.normalizedInput.line1 + " " +
+    var normalizedAddress = response.normalizedInput.line1 + ", " +
         response.normalizedInput.city + ", " +
         response.normalizedInput.state + " " +
         response.normalizedInput.zip;
+
+    for (let i = 0; i < response.offices.length; i++) {
+        for (let j = 0; j < response.offices[i].officialIndices.length; j++) {
+            var officialIndex = response.offices[i].officialIndices[j];
+            response.officials[officialIndex].office = response.offices[i].name;
+            response.officials[officialIndex].level = response.offices[i].levels[0];
+        }
+    }
+
     if (response.officials.length > 0) {
         for (let i = 0; i < response.officials.length; i++) {
             var normEl = document.createElement("p");
-            normEl.appendChild(document.createTextNode(response.officials[i].name));
+            normEl.appendChild(document.createTextNode(response.officials[i].name + ": " +
+                response.officials[i].office + " (" + response.officials[i].level + ")"));
             el.appendChild(normEl);
         }
     } else {
@@ -59,10 +69,11 @@ function load() {
     var inputState = window.location.href.split("input-state=")[1].split("&")[0];
     var inputZip = window.location.href.split("input-zip=")[1].split("&")[0];
 
-    var displayAddress = document.getElementById("display-address");
-    displayAddress.innerHTML = inputStreet + "<br>" + inputCity + ", " + inputState + " " + inputZip;
-
     var normalizedAddress = inputStreet + ", " + inputCity + ", " + inputState + " " + inputZip;
+
+    var displayAddress = document.getElementById("display-address");
+    displayAddress.innerHTML = normalizedAddress.replace(", ", "<br>");
+
     lookup(normalizedAddress, renderResults);
 }
 
