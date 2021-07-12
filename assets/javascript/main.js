@@ -41,12 +41,93 @@ function renderResults(response, rawResponse) {
     }
 
     if (response.officials.length > 0) {
+        var elem = document.createElement("div");
+        elem.setAttribute("class", "usa-accordion");
+        elem.setAttribute("aria-multiselectable", "true")
         for (let i = 0; i < response.officials.length; i++) {
-            var normEl = document.createElement("p");
-            normEl.appendChild(document.createTextNode(response.officials[i].name + ": " +
-                response.officials[i].office + " (" + response.officials[i].level + ")"));
-            el.appendChild(normEl);
+            console.log(response);
+
+            var titleHeader = document.createElement("h2");
+            titleHeader.setAttribute("class", "font-serif-md");
+            titleHeader.style.color = "rgb(26, 54, 85)";
+            titleHeader.innerHTML = response.officials[i].name + ", " + response.officials[i].office;
+
+            // Adds the title, such as President
+            elem.appendChild(titleHeader);
+            
+            var accordianHeader = document.createElement("h4");
+            accordianHeader.setAttribute("class", "usa-accordion__heading");
+            var accordianHeaderButton = document.createElement("button");
+            accordianHeaderButton.setAttribute("class", "usa-accordion__button");
+            accordianHeaderButton.setAttribute("aria-expanded", "true");
+            var controlNumber = "m-a" + i;
+            accordianHeaderButton.setAttribute("aria-controls", controlNumber);
+            accordianHeaderButton.innerHTML = "Contact " + response.officials[i].name;
+
+            accordianHeader.appendChild(accordianHeaderButton);
+
+            var accordianContent = document.createElement("div");
+            accordianContent.setAttribute("id", controlNumber);
+            accordianContent.setAttribute("class", "usa-accordion__content usa-prose")
+
+            var bulletList = document.createElement("ul");
+            var firstElem = document.createElement("li");
+            firstElem.innerHTML = "Party Affiliation: " + response.officials[i].party;
+            bulletList.appendChild(firstElem);
+
+            var secondElem = document.createElement("li");
+            var addressValid = response.officials[i].address || "None provided";
+            if (addressValid) {
+                console.log(addressValid);
+                if (addressValid != "None provided") {
+                    var addressTogether = response.officials[i].address[0].line1 + " " + response.officials[i].address[0].city + ", " + 
+                    response.officials[i].address[0].state + " " + response.officials[i].address[0].zip;
+                    secondElem.innerHTML = "Address: " + addressTogether;
+                } else {
+                    secondElem.innerHTML = "Address: None provided";
+                }
+            }
+
+            bulletList.appendChild(secondElem);
+
+            var thirdElem = document.createElement("li");
+            thirdElem.innerHTML = "Phone number: " + response.officials[i].phones[0];
+
+            bulletList.appendChild(thirdElem);
+
+            var fourthElem = document.createElement("li");
+            fourthElem.innerHTML = "Website: ";
+            var link = document.createElement("a");
+            link.setAttribute("href", response.officials[i].urls[0]);
+            link.innerHTML = response.officials[i].urls[0];
+            fourthElem.appendChild(link);
+
+            bulletList.appendChild(fourthElem);
+
+            var socials = response.officials[i].channels || "None";
+            if (socials != "None") {
+                for (var j = 0; j < socials.length; j++) {
+                    var nextElem = document.createElement("li");
+                    var linkToSocial = document.createElement("a");
+                    if (socials[j].type.toLowerCase() == "twitter") {
+                        linkToSocial.setAttribute("href", "https://twitter.com/" + socials[j].id);
+                    } else if (socials[j].type.toLowerCase() == "facebook") {
+                        linkToSocial.setAttribute("href", "https://facebook.com/" + socials[j].id);
+                    }
+                    linkToSocial.innerHTML = "@" + socials[j].id;
+                    nextElem.innerHTML = socials[j].type + ": ";
+                    nextElem.appendChild(linkToSocial);
+                    bulletList.appendChild(nextElem);
+                }
+            }
+
+            accordianContent.appendChild(bulletList);
+
+            elem.appendChild(accordianHeader);
+            elem.appendChild(accordianContent);
+
         }
+        el.appendChild(elem);
     } else {
         el.appendChild(document.createTextNode(
             "Could not find elected officials for " + normalizedAddress));
@@ -57,7 +138,7 @@ function renderResults(response, rawResponse) {
  * Initialize the API client.
  */
  function start() {
-    gapi.client.setApiKey("INSERT API KEY HERE");
+    gapi.client.setApiKey("AIzaSyBkN6qN0M8Q0XPgkrzGbf9GmsrfMUdkVLU");
 }
 
 /**
