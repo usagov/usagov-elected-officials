@@ -8,7 +8,7 @@ To start a local web server, run one of the following commands in the working di
 
 #### Python 3.x
 ```bash
-python -m http.server 8000
+python3 -m http.server 8000
 ```
 
 #### Python 2.x
