@@ -138,7 +138,7 @@ function renderResults(response, rawResponse) {
  * Initialize the API client.
  */
  function start() {
-    gapi.client.setApiKey("AIzaSyBkN6qN0M8Q0XPgkrzGbf9GmsrfMUdkVLU");
+    gapi.client.setApiKey("INSERT API KEY HERE");
 }
 
 /**
