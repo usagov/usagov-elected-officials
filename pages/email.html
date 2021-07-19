@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Elected Officials | USA.gov</title>
+        <script src="../assets/javascript/uswds-init.min.js"></script>
+        <link rel="stylesheet" href="../assets/css/styles.css" />
+    </head>
+
+    <body onload="load()">
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script src="../assets/javascript/main.js"></script>
+
+        <script src="../assets/javascript/uswds.min.js"></script>
+
+        <div style="padding: 10px">
+            <h1 class="font-serif-xl" style="color: rgb(182, 50, 31)">Contact Your Elected Officials</h1>
+
+            <p class="font-serif-sm">
+                Below you will find a form to help you write a message to your elected officials. Simply fill out the subject
+                and the body portions of the form and press submit. You will be redirected to your email where all you have to
+                do is send the email with everything prefilled.
+            </p>
+
+            <br>
+
+            <h3 class="font-serif-sm" style="padding-bottom: 0px; margin-bottom: 0px;">
+                Address you entered:
+            </h3>
+
+            <p class="font serif-sm" style="margin-top: 0px;" id="display-address">
+                Your Address<br>
+                City, State, Zip
+            </p>
+
+            <p class="font-serif-3xs text-underline"><a href="../index.html">edit address</a></p>
+
+            <br>
+
+            <p class="font-serif-lg" style="color: rgb(27, 56, 88)">
+                Write Your Message
+            </p>
+
+            <form class="usa-form" action="mailto:someone@example.com" method="POST" enctype="text/plain">
+                <label class="usa-label" id="input-issue" for="input-type-issue">What's the issue you're writing about today?</label>
+                <textarea
+                class="usa-textarea"
+                id="input-type-issue"
+                aria-labelledby="input-issue"
+                name="input-type-issue"
+                ></textarea>
+
+                <label class="usa-label" id="input-about" for="input-type-about">What do you want to say about the issue?</label>
+                <textarea
+                class="usa-textarea"
+                id="input-type-about"
+                aria-labelledby="input-about"
+                name="input-type-about"
+                ></textarea>
+
+                <label class="usa-label" id="input-action" for="input-type-action">What do you want your elected official to do about it?</label>
+                <textarea
+                class="usa-textarea"
+                id="input-type-action"
+                aria-labelledby="input-action"
+                name="input-type-action"
+                ></textarea>
+
+                <button class="usa-button usa-button--accent-cool" style="width: 80%">Send message</button>
+            </form>
+        </div>
+    </body>
+</html>
