@@ -121,6 +121,18 @@ function renderResults(response, rawResponse) {
                 }
             }
 
+            var emails = response.officials[i].emails || "None";
+            if (emails != "None") {
+                var primaryEmail = document.createElement("button");
+                var linkToContact = document.createElement("a");
+                linkToContact.setAttribute("href", "/pages/contact.html?");
+                primaryEmail.setAttribute("class", "usa-button usa-button--accent-cool");
+                primaryEmail.style.marginTop = "15px";
+                primaryEmail.innerHTML = "Contact via Email";
+                linkToContact.appendChild(primaryEmail);
+                bulletList.appendChild(linkToContact);
+            }
+
             accordianContent.appendChild(bulletList);
 
             elem.appendChild(accordianHeader);
