@@ -11,7 +11,7 @@
 
     <body onload="load()">
         <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=INSERT_API_KEY"></script>
-        <script src="../assets/javascript/address.js"></script>
+        <script src="../assets/javascript/autocomplete.js"></script>
 
         <script src="assets/javascript/uswds.min.js"></script>
 
@@ -39,6 +39,7 @@
                       name="input-street"
                       type="text"
                       onkeypress="return event.keyCode != 13;"
+                      required
                     />
 
                     <label id="myCity" class="usa-label" for="input-city">*city</label>
@@ -49,13 +50,14 @@
                       name="input-city"
                       type="text"
                       onkeypress="return event.keyCode != 13;"
+                      required
                     />
 
                     <div style="display: flex;">
                         <div style="padding-right: 20px;">
                             <label id="myState" class="usa-label" for="input-state">*state</label>
                             <div class="usa-combo-box">
-                                <select aria-labelledby="myState" class="usa-select" name="input-state" id="input-state">
+                                <select aria-labelledby="myState" class="usa-select" name="input-state" id="input-state" required>
                                     <option id="AL" value="AL">Alabama</option>
                                     <option id="AK" value="AK">Alaska</option>
                                     <option id="AZ" value="AZ">Arizona</option>
@@ -120,6 +122,7 @@
                               name="input-zip"
                               type="text"
                               onkeypress="return event.keyCode != 13;"
+                              required
                             />
                         </div>
                     </div>
