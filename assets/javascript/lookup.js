@@ -44,17 +44,33 @@ function renderResults(response, rawResponse) {
         var elem = document.createElement("div");
         elem.setAttribute("class", "usa-accordion");
         elem.setAttribute("aria-multiselectable", "true")
-        for (let i = 0; i < response.officials.length; i++) {
-            console.log(response);
 
-            var titleHeader = document.createElement("h2");
+        var levels = ["Federal", "State", "Local"];
+        for (let i = 0; i < levels.length; i++) {
+            var accordianHeader = document.createElement("h2");
+            accordianHeader.setAttribute("class", "usa-accordion__heading");
+            var accordianHeaderButton = document.createElement("button");
+            accordianHeaderButton.setAttribute("class", "usa-accordion__button");
+            accordianHeaderButton.innerHTML =  levels[i] + " Officials";
+
+            accordianHeader.appendChild(accordianHeaderButton);
+
+            var accordianContent = document.createElement("div");
+            accordianContent.setAttribute("id", levels[i] + " Officials");
+            accordianContent.setAttribute("class", "usa-accordion__content usa-prose")
+
+            elem.appendChild(accordianHeader);
+            elem.appendChild(accordianContent);
+        }
+
+        el.appendChild(elem);
+
+        for (let i = 0; i < response.officials.length; i++) {
+            var titleHeader = document.createElement("h3");
             titleHeader.setAttribute("class", "font-serif-md");
             titleHeader.style.color = "rgb(26, 54, 85)";
             titleHeader.innerHTML = response.officials[i].name + ", " + response.officials[i].office;
 
-            // Adds the title, such as President
-            elem.appendChild(titleHeader);
-            
             var accordianHeader = document.createElement("h4");
             accordianHeader.setAttribute("class", "usa-accordion__heading");
             var accordianHeaderButton = document.createElement("button");
@@ -78,7 +94,6 @@ function renderResults(response, rawResponse) {
             var secondElem = document.createElement("li");
             var addressValid = response.officials[i].address || "None provided";
             if (addressValid) {
-                console.log(addressValid);
                 if (addressValid != "None provided") {
                     var addressTogether = response.officials[i].address[0].line1 + " " + response.officials[i].address[0].city + ", " + 
                     response.officials[i].address[0].state + " " + response.officials[i].address[0].zip;
@@ -135,11 +150,20 @@ function renderResults(response, rawResponse) {
 
             accordianContent.appendChild(bulletList);
 
-            elem.appendChild(accordianHeader);
-            elem.appendChild(accordianContent);
+            var appendLocation;
+            var level = response.officials[i].level;
+            if (level == "country") {
+                appendLocation = document.getElementById("Federal Officials");
+            } else if (level == "administrativeArea1") {
+                appendLocation = document.getElementById("State Officials");
+            }  else {
+                appendLocation = document.getElementById("Local Officials");
+            }
 
+            appendLocation.appendChild(titleHeader);
+            appendLocation.appendChild(accordianHeader);
+            appendLocation.appendChild(accordianContent);
         }
-        el.appendChild(elem);
     } else {
         el.appendChild(document.createTextNode(
             "Could not find elected officials for " + normalizedAddress));
