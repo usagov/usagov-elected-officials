@@ -92,9 +92,21 @@ function renderResults(response, rawResponse) {
             accordianContent.setAttribute("class", "usa-accordion__content usa-prose")
 
             var bulletList = document.createElement("ul");
-            var firstElem = document.createElement("li");
-            firstElem.innerHTML = "Party Affiliation: " + response.officials[i].party;
-            bulletList.appendChild(firstElem);
+
+            /*
+            *   Check to see if the representative has a party affiliation, if not, do not display.
+            */
+
+            var partyValid = response.officials[i].party || "None";
+            if (partyValid != "None") {
+                var firstElem = document.createElement("li");
+                firstElem.innerHTML = "Party Affiliation: " + response.officials[i].party;
+                bulletList.appendChild(firstElem);
+            } 
+
+            /*
+            *   Check to see if the representative has a physical address, if not, say None provided.
+            */
 
             var secondElem = document.createElement("li");
             var addressValid = response.officials[i].address || "None provided";
@@ -110,19 +122,41 @@ function renderResults(response, rawResponse) {
 
             bulletList.appendChild(secondElem);
 
+            /*
+            *   Check to see if the representative has a phone number, if not, say None provided.
+            */
+
             var thirdElem = document.createElement("li");
-            thirdElem.innerHTML = "Phone number: " + response.officials[i].phones[0];
+            var phoneValid = response.officials[i].phones[0] || "None";
+            if (phoneValid != "None") {
+                thirdElem.innerHTML = "Phone number: " + response.officials[i].phones[0];
+            } else {
+                thirdElem.innerHTML = "Phone number: None provided";
+            }
 
             bulletList.appendChild(thirdElem);
 
+            /*
+            *   Check to see if the representative has a website, if not, say None provided.
+            */
+
+            var websiteValid = response.officials[i].urls[0] || "None";
             var fourthElem = document.createElement("li");
-            fourthElem.innerHTML = "Website: ";
-            var link = document.createElement("a");
-            link.setAttribute("href", response.officials[i].urls[0]);
-            link.innerHTML = response.officials[i].urls[0];
-            fourthElem.appendChild(link);
+            if (websiteValid != "None") {
+                fourthElem.innerHTML = "Website: ";
+                var link = document.createElement("a");
+                link.setAttribute("href", response.officials[i].urls[0]);
+                link.innerHTML = response.officials[i].urls[0];
+                fourthElem.appendChild(link);
+            } else {
+                fourthElem.innerHTML = "Website: None provided";
+            }
 
             bulletList.appendChild(fourthElem);
+
+            /*
+            *   Check to see if the representative has social media, if not, do not display.
+            */
 
             var socials = response.officials[i].channels || "None";
             if (socials != "None") {
@@ -140,6 +174,10 @@ function renderResults(response, rawResponse) {
                     bulletList.appendChild(nextElem);
                 }
             }
+
+            /*
+            *   Check to see if the representative has an email, if not, do not display contact button
+            */
 
             var emails = response.officials[i].emails || "None";
             if (emails != "None") {
