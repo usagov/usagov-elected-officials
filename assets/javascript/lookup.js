@@ -51,6 +51,11 @@ function renderResults(response, rawResponse) {
             accordianHeader.setAttribute("class", "usa-accordion__heading");
             var accordianHeaderButton = document.createElement("button");
             accordianHeaderButton.setAttribute("class", "usa-accordion__button");
+            accordianHeaderButton.setAttribute("aria-expanded", "true");
+
+            var controlNumber = levels[i] + " Officials";
+            accordianHeaderButton.setAttribute("aria-controls", controlNumber);
+
             accordianHeaderButton.innerHTML =  levels[i] + " Officials";
 
             accordianHeader.appendChild(accordianHeaderButton);
