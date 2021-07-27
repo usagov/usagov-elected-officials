@@ -127,7 +127,7 @@ function renderResults(response, rawResponse) {
             */
 
             var thirdElem = document.createElement("li");
-            var phoneValid = response.officials[i].phones[0] || "None";
+            var phoneValid = response.officials[i].phones || "None";
             if (phoneValid != "None") {
                 thirdElem.innerHTML = "Phone number: " + response.officials[i].phones[0];
             } else {
@@ -140,7 +140,7 @@ function renderResults(response, rawResponse) {
             *   Check to see if the representative has a website, if not, say None provided.
             */
 
-            var websiteValid = response.officials[i].urls[0] || "None";
+            var websiteValid = response.officials[i].urls || "None";
             var fourthElem = document.createElement("li");
             if (websiteValid != "None") {
                 fourthElem.innerHTML = "Website: ";
