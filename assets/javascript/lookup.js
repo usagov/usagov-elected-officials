@@ -125,7 +125,8 @@ function renderResults(response, rawResponse) {
             if (emails != "None") {
                 var primaryEmail = document.createElement("button");
                 var linkToContact = document.createElement("a");
-                linkToContact.setAttribute("href", "/pages/contact.html?");
+                var emailLinkified = response.officials[i].emails[0].replace("@", "_");
+                linkToContact.setAttribute("href", "/pages/contact.html?input-email=" + emailLinkified);
                 primaryEmail.setAttribute("class", "usa-button usa-button--accent-cool");
                 primaryEmail.style.marginTop = "15px";
                 primaryEmail.innerHTML = "Contact via Email";
