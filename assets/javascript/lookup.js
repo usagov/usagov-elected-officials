@@ -215,6 +215,217 @@ function renderResults(response, rawResponse) {
 }
 
 /**
+ * Populate the page with filler values for
+ * offline testing (i.e. without the API key)
+ */
+function offlineTest() {
+    var el = document.getElementById("results");
+
+    var elem = document.createElement("div");
+    elem.setAttribute("class", "usa-accordion");
+    elem.setAttribute("aria-multiselectable", "true")
+
+    var levels = ["Website Creators", "Filler Values"];
+    for (let i = 0; i < levels.length; i++) {
+        var accordianHeader = document.createElement("h2");
+        accordianHeader.setAttribute("class", "usa-accordion__heading");
+        var accordianHeaderButton = document.createElement("button");
+        accordianHeaderButton.setAttribute("class", "usa-accordion__button");
+        accordianHeaderButton.setAttribute("aria-expanded", "true");
+
+        var controlNumber = levels[i];
+        accordianHeaderButton.setAttribute("aria-controls", controlNumber);
+
+        accordianHeaderButton.innerHTML =  levels[i];
+
+        accordianHeader.appendChild(accordianHeaderButton);
+
+        var accordianContent = document.createElement("div");
+        accordianContent.setAttribute("id", levels[i]);
+        accordianContent.setAttribute("class", "usa-accordion__content usa-prose")
+
+        elem.appendChild(accordianHeader);
+        elem.appendChild(accordianContent);
+    }
+
+    el.appendChild(elem);
+
+    const response = {
+        officials: [
+            {
+                name: "Charlie Liu",
+                office: "Website Creator",
+                party: "General Services Administration",
+                address: [{line1: "123 Main Street", city: "Somewhere", state: "DC", zip: "12345"}],
+                phones: ["(123) 456-7890"],
+                urls: ["https://usa.gov/elected-officials"],
+                channels: [{type: "LinkedIn", id: "cliu13"}],
+                emails: ["charlie.liu@gsa.gov"],
+                level: "creator"
+            },
+            {
+                name: "Jacob Cuomo",
+                office: "Website Creator",
+                party: "General Services Administration",
+                address: [{line1: "123 Main Street", city: "Somewhere", state: "DC", zip: "12345"}],
+                phones: ["(123) 456-7890"],
+                urls: ["https://usa.gov/elected-officials"],
+                channels: [{type: "LinkedIn", id: "jacob-cuomo-659937125"}],
+                emails: ["jacob.cuomo@gsa.gov"],
+                level: "creator"
+            },
+            {
+                name: "John Smith",
+                office: "Filler Value",
+                party: "Democratic Party",
+                level: "filler"
+            },
+            {
+                name: "Jane Doe",
+                office: "Filler Value",
+                party: "Republican Party",
+                level: "filler"
+            }
+        ]
+    }
+
+    for (let i = 0; i < response.officials.length; i++) {
+        var titleHeader = document.createElement("h3");
+        titleHeader.setAttribute("class", "font-serif-md");
+        titleHeader.style.color = "rgb(26, 54, 85)";
+        titleHeader.innerHTML = response.officials[i].name + ", " + response.officials[i].office;
+
+        var accordianHeader = document.createElement("h4");
+        accordianHeader.setAttribute("class", "usa-accordion__heading");
+        var accordianHeaderButton = document.createElement("button");
+        accordianHeaderButton.setAttribute("class", "usa-accordion__button");
+        accordianHeaderButton.setAttribute("aria-expanded", "true");
+        var controlNumber = "m-a" + i;
+        accordianHeaderButton.setAttribute("aria-controls", controlNumber);
+        accordianHeaderButton.innerHTML = "Contact " + response.officials[i].name;
+
+        accordianHeader.appendChild(accordianHeaderButton);
+
+        var accordianContent = document.createElement("div");
+        accordianContent.setAttribute("id", controlNumber);
+        accordianContent.setAttribute("class", "usa-accordion__content usa-prose")
+
+        var bulletList = document.createElement("ul");
+
+        /*
+        *   Check to see if the representative has a party affiliation, if not, do not display.
+        */
+
+        var partyValid = response.officials[i].party || "None";
+        if (partyValid != "None") {
+            var firstElem = document.createElement("li");
+            firstElem.innerHTML = "Party Affiliation: " + response.officials[i].party;
+            bulletList.appendChild(firstElem);
+        } 
+
+        /*
+        *   Check to see if the representative has a physical address, if not, say None provided.
+        */
+
+        var secondElem = document.createElement("li");
+        var addressValid = response.officials[i].address || "None provided";
+        if (addressValid) {
+            if (addressValid != "None provided") {
+                var addressTogether = response.officials[i].address[0].line1 + " " + response.officials[i].address[0].city + ", " + 
+                response.officials[i].address[0].state + " " + response.officials[i].address[0].zip;
+                secondElem.innerHTML = "Address: " + addressTogether;
+            } else {
+                secondElem.innerHTML = "Address: None provided";
+            }
+        }
+
+        bulletList.appendChild(secondElem);
+
+        /*
+        *   Check to see if the representative has a phone number, if not, say None provided.
+        */
+
+        var thirdElem = document.createElement("li");
+        var phoneValid = response.officials[i].phones || "None";
+        if (phoneValid != "None") {
+            thirdElem.innerHTML = "Phone number: " + response.officials[i].phones[0];
+        } else {
+            thirdElem.innerHTML = "Phone number: None provided";
+        }
+
+        bulletList.appendChild(thirdElem);
+
+        /*
+        *   Check to see if the representative has a website, if not, say None provided.
+        */
+
+        var websiteValid = response.officials[i].urls || "None";
+        var fourthElem = document.createElement("li");
+        if (websiteValid != "None") {
+            fourthElem.innerHTML = "Website: ";
+            var link = document.createElement("a");
+            link.setAttribute("href", response.officials[i].urls[0]);
+            link.innerHTML = response.officials[i].urls[0];
+            fourthElem.appendChild(link);
+        } else {
+            fourthElem.innerHTML = "Website: None provided";
+        }
+
+        bulletList.appendChild(fourthElem);
+
+        /*
+        *   Check to see if the representative has social media, if not, do not display.
+        */
+
+        var socials = response.officials[i].channels || "None";
+        if (socials != "None") {
+            for (var j = 0; j < socials.length; j++) {
+                var nextElem = document.createElement("li");
+                var linkToSocial = document.createElement("a");
+                if (socials[j].type.toLowerCase() == "linkedin") {
+                    linkToSocial.setAttribute("href", "https://linkedin.com/in/" + socials[j].id);
+                }
+                linkToSocial.innerHTML = "@" + socials[j].id;
+                nextElem.innerHTML = socials[j].type + ": ";
+                nextElem.appendChild(linkToSocial);
+                bulletList.appendChild(nextElem);
+            }
+        }
+
+        /*
+        *   Check to see if the representative has an email, if not, do not display contact button
+        */
+
+        var emails = response.officials[i].emails || "None";
+        if (emails != "None") {
+            var primaryEmail = document.createElement("button");
+            var linkToContact = document.createElement("a");
+            var emailLinkified = response.officials[i].emails[0].replace("@", "_");
+            linkToContact.setAttribute("href", "/pages/contact.html?input-email=" + emailLinkified);
+            primaryEmail.setAttribute("class", "usa-button usa-button--accent-cool");
+            primaryEmail.style.marginTop = "15px";
+            primaryEmail.innerHTML = "Contact via Email";
+            linkToContact.appendChild(primaryEmail);
+            bulletList.appendChild(linkToContact);
+        }
+
+        accordianContent.appendChild(bulletList);
+
+        var appendLocation;
+        var level = response.officials[i].level;
+        if (level == "creator") {
+            appendLocation = document.getElementById("Website Creators");
+        }  else {
+            appendLocation = document.getElementById("Filler Values");
+        }
+
+        appendLocation.appendChild(titleHeader);
+        appendLocation.appendChild(accordianHeader);
+        appendLocation.appendChild(accordianContent);
+    }
+}
+
+/**
  * Initialize the API client.
  */
  function start() {
@@ -234,6 +445,12 @@ function load() {
 
     var displayAddress = document.getElementById("display-address");
     displayAddress.innerHTML = normalizedAddress.replace(", ", "<br>");
+
+    if (normalizedAddress == "123 Main Street, Somewhere, DC 12345") {
+        console.log("[DEBUG] Offline testing enabled!");
+        offlineTest();
+        return;
+    }
 
     lookup(normalizedAddress, renderResults);
 }
