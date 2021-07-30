@@ -1,5 +1,5 @@
 /**
- * Process form data, display address, and search for elected officials.
+ * Process email from URL, set mailto link with that email, and add email to bottom of the page.
  */
  function load() {
     var inputEmail = window.location.href.split("input-email=")[1].replace("_", "@");
@@ -8,6 +8,6 @@
     mailForm.setAttribute("action", "mailto:" + inputEmail);
 
     var buttonAlt = document.getElementById("button-alt");
-    var message = "Having trouble with the button above? Send an email directly to " + inputEmail;
+    var message = "Having trouble with the button above? Send your concern directly to " + inputEmail;
     buttonAlt.innerHTML = message;
 }

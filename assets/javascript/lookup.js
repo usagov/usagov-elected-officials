@@ -45,6 +45,9 @@ function renderResults(response, rawResponse) {
         elem.setAttribute("class", "usa-accordion");
         elem.setAttribute("aria-multiselectable", "true")
 
+        /*
+        *   Iterate through each level of elected official and create an accordian for that specific level.
+        */
         var levels = ["Federal", "State", "Local"];
         for (let i = 0; i < levels.length; i++) {
             var accordianHeader = document.createElement("h2");
@@ -70,6 +73,9 @@ function renderResults(response, rawResponse) {
 
         el.appendChild(elem);
 
+        /*
+        *   Iterate through each elected official returned by the API and create an accordian section for them.
+        */
         for (let i = 0; i < response.officials.length; i++) {
             var titleHeader = document.createElement("h3");
             titleHeader.setAttribute("class", "font-serif-md");
@@ -289,6 +295,9 @@ function offlineTest() {
         ]
     }
 
+    /*
+    *   Iterate through each elected official returned by the API and create an accordian section for them.
+    */
     for (let i = 0; i < response.officials.length; i++) {
         var titleHeader = document.createElement("h3");
         titleHeader.setAttribute("class", "font-serif-md");
