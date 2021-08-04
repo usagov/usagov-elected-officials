@@ -133,7 +133,14 @@ function renderResults(response, rawResponse) {
             if (website != "none provided") {
                 let link = document.createElement("a");
                 link.setAttribute("href", response.officials[i].urls[0]);
-                link.innerHTML = response.officials[i].urls[0];
+
+                // Shorten the link and remove unnecessary characters
+                let cleanLink = response.officials[i].urls[0]
+                    .replace("https://", "").replace("http://", "").replace("www.", "");
+                if (cleanLink[cleanLink.length - 1] == "/") {
+                    cleanLink = cleanLink.slice(0, -1);
+                }
+                link.innerHTML = cleanLink;
 
                 nextElem.innerHTML = "Website: ";
                 nextElem.appendChild(link);
