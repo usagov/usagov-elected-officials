@@ -175,7 +175,7 @@ function renderResults(response, rawResponse) {
                 primaryEmail.style.marginTop = "15px";
                 primaryEmail.innerHTML = "Contact via Email";
 
-                linkToContact.setAttribute("href", "/pages/contact.html?input-email=" + emailLinkified);
+                linkToContact.setAttribute("href", "contact.html?input-email=" + emailLinkified);
                 linkToContact.appendChild(primaryEmail);
 
                 bulletList.appendChild(linkToContact);
