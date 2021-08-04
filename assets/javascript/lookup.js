@@ -151,6 +151,8 @@ function renderResults(response, rawResponse) {
                         linkToSocial.setAttribute("href", "https://twitter.com/" + socials[j].id);
                     } else if (socials[j].type.toLowerCase() == "facebook") {
                         linkToSocial.setAttribute("href", "https://facebook.com/" + socials[j].id);
+                    } else if (socials[j].type.toLowerCase() == "youtube") {
+                        linkToSocial.setAttribute("href", "https://youtube.com/" + socials[j].id);
                     } else if (socials[j].type.toLowerCase() == "linkedin") {
                         linkToSocial.setAttribute("href", "https://linkedin.com/in/" + socials[j].id);
                     }
