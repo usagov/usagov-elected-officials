@@ -1,3 +1,6 @@
+// Autocomplete object must be a global variable
+var autocomplete;
+
 /**
  * Fill in address components with auto-completed values.
  */
@@ -38,6 +41,28 @@ function fillInAddress() {
 }
 
 /**
+ * If there is an error with accessing the Google Places Autocomplete API,
+ * replace the autocomplete object with a regular input field. Checks every 10s.
+ */
+ function checkForAutocompleteErrors(inputField) {
+    let secondsCounter = 0;
+
+    let googleErrorCheckinterval = setInterval(function () {
+        if (inputField.classList.contains("gm-err-autocomplete")) {
+            inputField.outerHTML = 
+                "<input class='usa-input' id='input-street' aria-labelledby='myStreetAddress' \
+                name='input-street' type='text' onkeypress='return event.keyCode != 13;' required/>";
+            clearInterval(googleErrorCheckinterval);
+        }
+
+        secondsCounter++;
+        if (secondsCounter === 10){
+            clearInterval(googleErrorCheckinterval);
+        }
+    }, 1000);
+}
+
+/**
  * Set up the Google Places Autocomplete feature.
  */
 function load() {
@@ -50,7 +75,8 @@ function load() {
         types: ["address"],
     };
 
-    // autocomplete object must be a global variable
-    var autocomplete = new google.maps.places.Autocomplete(inputStreet, options);
+    autocomplete = new google.maps.places.Autocomplete(inputStreet, options);
     autocomplete.addListener("place_changed", fillInAddress);
+
+    checkForAutocompleteErrors(inputStreet);
 }
