@@ -101,35 +101,46 @@ function renderResults(response, rawResponse) {
             // Create bullet list of details for the elected official
             let bulletList = document.createElement("ul");
 
-            // Display party affiliation, if provided
+            // Display party affiliation
+            // NOTE: unlike other details, this field will display
+            // "none provided" if no party is specified. This is
+            // the only mandatory detail for each elected official
+            // (so the accordion isn't blank if there are no details.
             let party = response.officials[i].party || "none provided";
             let nextElem = document.createElement("li");
-            nextElem.innerHTML = "Party Affiliation: " + party;
+            nextElem.innerHTML = "<b>Party Affiliation:</b> " + party;
             bulletList.appendChild(nextElem);
 
             // Display address, if provided
             let address = response.officials[i].address || "none provided";
             nextElem = document.createElement("li");
             if (address != "none provided") {
-                // Normalize address, if provided
+                // Normalize address
                 address = address[0].line1 + " " + address[0].city + ", " + address[0].state + " " + address[0].zip;
+
+                nextElem = document.createElement("li");
+                nextElem.innerHTML = "<b>Address:</b> " + address;
+
+                bulletList.appendChild(nextElem);
             }
-            nextElem.innerHTML = "Address: " + address;
-            bulletList.appendChild(nextElem);
 
             // Display phone number, if provided
             let phoneNumber = response.officials[i].phones || "none provided";
-            nextElem = document.createElement("li");
             if (phoneNumber != "none provided") {
-                // Select first phone number, if provided
-                phoneNumber = phoneNumber[0];
+                // Select first phone number and create clickable link
+                let linkToPhone = document.createElement("a");
+                linkToPhone.setAttribute("href", "tel:" + phoneNumber[0]);
+                linkToPhone.innerHTML = phoneNumber[0];
+
+                nextElem = document.createElement("li");
+                nextElem.innerHTML = "<b>Phone Number:</b> ";
+                nextElem.appendChild(linkToPhone);
+
+                bulletList.appendChild(nextElem);
             }
-            nextElem.innerHTML = "Phone Number: " + phoneNumber;
-            bulletList.appendChild(nextElem);
 
             // Display website, if provided
             let website = response.officials[i].urls || "none provided";
-            nextElem = document.createElement("li");
             if (website != "none provided") {
                 let link = document.createElement("a");
                 link.setAttribute("href", response.officials[i].urls[0]);
@@ -142,17 +153,19 @@ function renderResults(response, rawResponse) {
                 }
                 link.innerHTML = cleanLink;
 
-                nextElem.innerHTML = "Website: ";
+                nextElem = document.createElement("li");
+                nextElem.innerHTML = "<b>Website:</b> ";
                 nextElem.appendChild(link);
-            } else {
-                nextElem.innerHTML = "Website: " + website;
+
+                bulletList.appendChild(nextElem);
             }
-            bulletList.appendChild(nextElem);
 
             // Display social media accounts, if provided
             let socials = response.officials[i].channels || "none provided";
             if (socials != "none provided") {
                 for (let j = 0; j < socials.length; j++) {
+                    // Create appropriate type of link
+                    // for each social media account
                     let linkToSocial = document.createElement("a");
                     if (socials[j].type.toLowerCase() == "twitter") {
                         linkToSocial.setAttribute("href", "https://twitter.com/" + socials[j].id);
@@ -166,7 +179,7 @@ function renderResults(response, rawResponse) {
                     linkToSocial.innerHTML = "@" + socials[j].id;
 
                     nextElem = document.createElement("li");
-                    nextElem.innerHTML = socials[j].type + ": ";
+                    nextElem.innerHTML = "<b>" + socials[j].type + ":</b> ";
                     nextElem.appendChild(linkToSocial);
 
                     bulletList.appendChild(nextElem);
