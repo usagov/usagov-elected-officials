@@ -13,6 +13,8 @@
         <script src="https://apis.google.com/js/api.js"></script>
         <script src="../assets/javascript/contact.js"></script>
 
+        <script src="../assets/javascript/accessibility.js"></script>
+
         <script src="../assets/javascript/uswds.min.js"></script>
 
         <div>
@@ -38,31 +40,32 @@
             <p class="font-serif-xs">All form elements below are required and are marked with a (*) symbol.</p>
 
             <form id="mailForm" class="usa-form" onsubmit="writeMessage()" action="../index.html" autocomplete="off">
-                <label class="usa-label" id="issueField" for="input-issue">*What is the issue that you want to write about?</label>
+                <label class="usa-label" id="topicField" for="input-topic">*What is the issue that you want to write about?</label>
                 <textarea
-                class="usa-textarea"
-                id="input-issue"
-                aria-labelledby="input-issue"
-                name="input-issue"
-                required
+                    class="usa-textarea"
+                    id="input-topic"
+                    aria-labelledby="input-topic"
+                    name="input-topic"
+                    required
+                    autofocus
                 ></textarea>
 
                 <label class="usa-label" id="aboutField" for="input-about">*What do you want to say about the issue?</label>
                 <textarea
-                class="usa-textarea"
-                id="input-about"
-                aria-labelledby="input-about"
-                name="input-about"
-                required
+                    class="usa-textarea"
+                    id="input-about"
+                    aria-labelledby="input-about"
+                    name="input-about"
+                    required
                 ></textarea>
 
                 <label class="usa-label" id="actionField" for="input-action">*What do you want your elected official to do about the issue?</label>
                 <textarea
-                class="usa-textarea"
-                id="input-action"
-                aria-labelledby="input-action"
-                name="input-action"
-                required
+                    class="usa-textarea"
+                    id="input-action"
+                    aria-labelledby="input-action"
+                    name="input-action"
+                    required
                 ></textarea>
 
                 <button class="usa-button usa-button--accent-cool" style="width: 80%">Write My Message!</button>

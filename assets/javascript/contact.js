@@ -22,14 +22,14 @@
 function writeMessage() {
     let email = window.location.href.split("email=")[1].split("?")[0].replace("_", "@");
 
-    let issueField = document.getElementById("input-issue");
+    let topicField = document.getElementById("input-topic");
     let aboutField = document.getElementById("input-about");
     let actionField = document.getElementById("input-action");
 
     // Note: %0D%0A = newline character
     let address = "mailto:" + email;
     let subject = "?subject=" + "A Message From a Constituent";
-    let body = "&body=" + "The issue that I am inquiring about is:%0D%0A" + issueField.value + "%0D%0A%0D%0A" +
+    let body = "&body=" + "The issue that I am inquiring about is:%0D%0A" + topicField.value + "%0D%0A%0D%0A" +
         "My concerns regarding this issue are:%0D%0A" + aboutField.value + "%0D%0A%0D%0A" +
         "And my ideas to address this issue are:%0D%0A" + actionField.value;
 

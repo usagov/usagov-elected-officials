@@ -13,6 +13,8 @@
         <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=INSERT_API_KEY"></script>
         <script src="../assets/javascript/autocomplete.js"></script>
 
+        <script src="../assets/javascript/accessibility.js"></script>
+
         <script src="assets/javascript/uswds.min.js"></script>
 
         <div>
@@ -32,24 +34,25 @@
                 <form class="usa-form" action="pages/info.html" autocomplete="off">
                     <label id="myStreetAddress" class="usa-label" for="input-street">*Street Address</label>
                     <input
-                      class="usa-input"
-                      id="input-street"
-                      aria-labelledby="myStreetAddress"
-                      name="input-street"
-                      type="text"
-                      onkeypress="return event.keyCode != 13;"
-                      required
+                        class="usa-input"
+                        id="input-street"
+                        aria-labelledby="myStreetAddress"
+                        name="input-street"
+                        type="text"
+                        onkeypress="return event.keyCode != 13;"
+                        required
+                        autofocus
                     />
 
                     <label id="myCity" class="usa-label" for="input-city">*City</label>
                     <input
-                      class="usa-input"
-                      id="input-city"
-                      aria-labelledby="myCity"
-                      name="input-city"
-                      type="text"
-                      onkeypress="return event.keyCode != 13;"
-                      required
+                        class="usa-input"
+                        id="input-city"
+                        aria-labelledby="myCity"
+                        name="input-city"
+                        type="text"
+                        onkeypress="return event.keyCode != 13;"
+                        required
                     />
 
                     <div style="display: flex;">
@@ -115,13 +118,13 @@
                         <div style="width: 40%">
                             <label id="myZIP" class="usa-label" for="input-zip">*ZIP Code</label>
                             <input
-                              class="usa-input"
-                              id="input-zip"
-                              aria-labelledby="myZIP"
-                              name="input-zip"
-                              type="text"
-                              onkeypress="return event.keyCode != 13;"
-                              required
+                                class="usa-input"
+                                id="input-zip"
+                                aria-labelledby="myZIP"
+                                name="input-zip"
+                                type="text"
+                                onkeypress="return event.keyCode != 13;"
+                                required
                             />
                         </div>
                     </div>

@@ -51,7 +51,9 @@ function fillInAddress() {
         if (inputField.classList.contains("gm-err-autocomplete")) {
             inputField.outerHTML = 
                 "<input class='usa-input' id='input-street' aria-labelledby='myStreetAddress' \
-                name='input-street' type='text' onkeypress='return event.keyCode != 13;' required/>";
+                name='input-street' type='text' onkeypress='return event.keyCode != 13;' \
+                oninvalid='this.setCustomValidity(\x22Please fill out the street address field.\x22)' \
+                oninput='this.setCustomValidity(\x22\x22)' required/>";
             clearInterval(googleErrorCheckinterval);
         }
 
@@ -67,8 +69,6 @@ function fillInAddress() {
  */
 function load() {
     let inputStreet = document.getElementById("input-street");
-    inputStreet.focus();
-
     let options = {
         componentRestrictions: {country: "us"},
         fields: ["address_components"],
