@@ -197,7 +197,8 @@ function renderResults(response, rawResponse) {
                 primaryEmail.style.marginTop = "15px";
                 primaryEmail.innerHTML = "Contact via Email";
 
-                linkToContact.setAttribute("href", "contact.html?input-email=" + emailLinkified);
+                linkToContact.setAttribute("href", "contact.html?email=" + emailLinkified +
+                    "?name=" + response.officials[i].name + "?office=" + response.officials[i].office);
                 linkToContact.appendChild(primaryEmail);
 
                 bulletList.appendChild(linkToContact);
@@ -232,7 +233,7 @@ function renderResults(response, rawResponse) {
 /**
  * Initialize API client by setting the API key.
  */
- function start() {
+ function setApiKey() {
     gapi.client.setApiKey("INSERT_API_KEY");
 }
 
@@ -263,7 +264,7 @@ function load() {
 }
 
 // Load the GAPI Client Library
-gapi.load("client", start);
+gapi.load("client", setApiKey);
 
 // Mock response for offline testing
 var offlineResponse = {

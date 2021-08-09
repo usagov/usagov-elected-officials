@@ -15,52 +15,61 @@
 
         <script src="../assets/javascript/uswds.min.js"></script>
 
-        <div style="padding: 10px">
+        <div>
             <h1 class="font-serif-xl" style="color: rgb(182, 50, 31)">Contact Your Elected Official</h1>
 
             <p class="font-serif-sm">
-                Use this form to write and send an email message to your elected official.
+                Use this form to write an email message to your elected official.
             </p>
 
-            <br>
-
-            <p class="font-serif-lg" style="color: rgb(27, 56, 88)">
+            <h2 class="font-serif-lg" style="color: rgb(27, 56, 88)">
                 Write Your Message
+            </h2>
+
+            <h3 class="font-serif-sm" style="padding-bottom: 0px; margin-bottom: 0px;">
+                You Are Contacting:
+            </h3>
+
+            <p class="font serif-sm" style="margin-top: 0px;" id="display-official">
+                Official's Name<br>
+                Official's Position
             </p>
 
-            <p>All form elements below are required and are marked with a (*) symbol.</p>
+            <p class="font-serif-xs">All form elements below are required and are marked with a (*) symbol.</p>
 
-
-            <form id="mailForm" class="usa-form" action="mailto:someone@example.com" method="get" enctype="text/plain">
-                <label class="usa-label" id="input-issue" for="input-type-issue">*What is the issue that you are writing about today?</label>
+            <form id="mailForm" class="usa-form" onsubmit="writeMessage()" action="../index.html" autocomplete="off">
+                <label class="usa-label" id="issueField" for="input-issue">*What is the issue that you want to write about?</label>
                 <textarea
                 class="usa-textarea"
-                id="input-type-issue"
+                id="input-issue"
                 aria-labelledby="input-issue"
-                name="input-type-issue"
+                name="input-issue"
+                required
                 ></textarea>
 
-                <label class="usa-label" id="input-about" for="input-type-about">*What do you want to say about the issue?</label>
+                <label class="usa-label" id="aboutField" for="input-about">*What do you want to say about the issue?</label>
                 <textarea
                 class="usa-textarea"
-                id="input-type-about"
+                id="input-about"
                 aria-labelledby="input-about"
-                name="input-type-about"
+                name="input-about"
+                required
                 ></textarea>
 
-                <label class="usa-label" id="input-action" for="input-type-action">*What do you want your elected official to do about the issue?</label>
+                <label class="usa-label" id="actionField" for="input-action">*What do you want your elected official to do about the issue?</label>
                 <textarea
                 class="usa-textarea"
-                id="input-type-action"
+                id="input-action"
                 aria-labelledby="input-action"
-                name="input-type-action"
+                name="input-action"
+                required
                 ></textarea>
 
-                <input class="usa-button usa-button--accent-cool" onclick="setAction()" type="submit" name="submit" value="Send message"></input>
+                <button class="usa-button usa-button--accent-cool" style="width: 80%">Write My Message!</button>
             </form>
 
             <p id="button-alt" class="font-serif-xs" style="color: rgb(27, 56, 88)">
-                Having trouble with the button above? Send a message directly to: 
+                Having trouble with the button above? Copy this email address to use: 
             </p>
         </div>
     </body>

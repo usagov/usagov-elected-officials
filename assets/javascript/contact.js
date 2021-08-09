@@ -1,31 +1,41 @@
 /**
- * Process email from URL, set mailto link, and add email to the bottom of the page.
+ * Display name and office for recipient of message, and also
+ * add their email to backup message at the bottom of the page.
  */
  function load() {
-    const inputEmail = window.location.href.split("input-email=")[1].replace("_", "@");
+    let email = window.location.href.split("email=")[1].split("?")[0].replace("_", "@");
+    let name = window.location.href.split("name=")[1].split("?")[0].split("%20").join(" ");
+    let office = window.location.href.split("office=")[1].split("?")[0].split("%20").join(" ");
 
-    let mailForm = document.getElementById("mailForm");
-    mailForm.setAttribute("action", "mailto:" + inputEmail);
-
+    let displayOfficial = document.getElementById("display-official");
+    displayOfficial.innerHTML = name + "<br>" + office;
 
     // In case the mailto button doesn't work,
     // display email for user to manually input
     let buttonAlt = document.getElementById("button-alt");
-    let message = "Having trouble with the button above? Send your concern directly to " + inputEmail;
-    buttonAlt.innerHTML = message;
+    buttonAlt.innerHTML += email;
 }
 
-function setAction() {
-    const inputEmail = window.location.href.split("input-email=")[1].replace("_", "@");
-    let whatIssue = document.getElementById("input-type-issue");
-    let aboutIssue = document.getElementById("input-type-about");
-    let actionIssue = document.getElementById("input-type-action");
+/**
+ * Execute mailto link based on user-submitted content.
+ */
+function writeMessage() {
+    let email = window.location.href.split("email=")[1].split("?")[0].replace("_", "@");
 
-    let mailForm = document.getElementById("mailForm");
+    let issueField = document.getElementById("input-issue");
+    let aboutField = document.getElementById("input-about");
+    let actionField = document.getElementById("input-action");
 
-    let body = "The issue I am inquiring about is: %0D%0A" + whatIssue.value + "%0D%0A"
-                + "What I have to say about the issue is: %0D%0A" + aboutIssue.value + "%0D%0A";
-                + "The action I would like to be taken is: %0D%0A" + actionIssue.value + "%0D%0A";
-    let mailAction = "mailto: " + inputEmail + "?" + "subject=Hi, I was inquiring about an issue&body=" + body;
-    mailForm.setAttribute("action", mailAction);
+    // Note: %0D%0A = newline character
+    let address = "mailto:" + email;
+    let subject = "?subject=" + "A Message From a Constituent";
+    let body = "&body=" + "The issue that I am inquiring about is:%0D%0A" + issueField.value + "%0D%0A%0D%0A" +
+        "My concerns regarding this issue are:%0D%0A" + aboutField.value + "%0D%0A%0D%0A" +
+        "And my ideas to address this issue are:%0D%0A" + actionField.value;
+
+    // Must replace spaces with %20
+    let mailtoLink = (address + subject + body).replace(" ", "%20");
+    window.location.href = mailtoLink;
+
+    alert("Your message has been written, and a new window on the screen has opened with your email. Make sure to click send!");
 }
