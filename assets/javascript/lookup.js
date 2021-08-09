@@ -116,7 +116,7 @@ function renderResults(response, rawResponse) {
             nextElem = document.createElement("li");
             if (address != "none provided") {
                 // Normalize address
-                address = address[0].line1 + " " + address[0].city + ", " + address[0].state + " " + address[0].zip;
+                address = address[0].line1 + ", " + address[0].city + ", " + address[0].state + " " + address[0].zip;
 
                 nextElem = document.createElement("li");
                 nextElem.innerHTML = "<b>Address:</b> " + address;
